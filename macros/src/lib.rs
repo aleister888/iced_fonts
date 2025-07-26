@@ -190,8 +190,7 @@ pub fn generate_icon_functions(input: TokenStream) -> TokenStream {
                 #[doc = #doc]
                 #[must_use]
                 pub fn #fn_name<'a, Theme: Catalog + 'a, Renderer: text::Renderer<Font = Font>>() -> Text<'a, Theme, Renderer> {
-                    use iced_widget::text;
-                    text(#c).font(#font_name).#shaping
+                    iced_fonts::iced_widget::text(#c).font(#font_name).#shaping
                 }
             });
 

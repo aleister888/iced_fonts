@@ -1,14 +1,9 @@
 #[allow(unused_imports)]
 use iced_core::Font;
-pub use iced_fonts_macros::generate_icon_functions;
 
-// problems
-//
-// devicons shaping
-// materal shaping
-// fontawesome shaping
-// octicons shaping
-// powerline shaping, bad generation
+pub use iced_widget; // To avoid adding iced_widget to call site crates for the macro.
+
+pub use iced_fonts_macros::generate_icon_functions;
 
 #[cfg(feature = "bootstrap")]
 /// The default icon font bytes for loading the font into iced.

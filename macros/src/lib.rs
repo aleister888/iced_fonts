@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use proc_macro::TokenStream;
-use proc_macro2::{Ident, Span};
+use proc_macro2::{Ident, Span, TokenTree};
 use quote::quote;
 use syn::{
     LitInt, LitStr, Token,
@@ -11,6 +11,7 @@ use syn::{
 use ttf_parser::Face;
 
 struct MacroInput {
+    frontend_crate: TokenTree,
     /// e.g. `"fonts/bootstrap-icons-new.ttf"`
     font_path: LitStr,
     /// e.g. `bootstrap`
@@ -25,6 +26,7 @@ struct MacroInput {
 
 impl Parse for MacroInput {
     fn parse(input: ParseStream<'_>) -> syn::Result<Self> {
+        let frontend_crate = input.parse()?;
         let font_path = input.parse()?;
         let _: Token![,] = input.parse()?;
         let module_name = input.parse()?;
@@ -39,6 +41,7 @@ impl Parse for MacroInput {
         let _: Option<Token![,]> = input.parse()?;
 
         Ok(Self {
+            frontend_crate,
             font_path,
             module_name,
             font_name,
@@ -54,8 +57,9 @@ impl Parse for MacroInput {
 /// 3. Parameter literal name of the font created one line above.
 /// 4. Optional parameter &str of where documenation exists for this font.
 #[proc_macro]
-pub fn generate_icon_functions(input: TokenStream) -> TokenStream {
+pub fn inner(input: TokenStream) -> TokenStream {
     let MacroInput {
+        frontend_crate,
         font_path,
         module_name,
         font_name,
@@ -190,7 +194,7 @@ pub fn generate_icon_functions(input: TokenStream) -> TokenStream {
                 #[doc = #doc]
                 #[must_use]
                 pub fn #fn_name<'a, Theme: Catalog + 'a, Renderer: text::Renderer<Font = Font>>() -> Text<'a, Theme, Renderer> {
-                    iced_fonts::iced_widget::text(#c).font(#font_name).#shaping
+                    #frontend_crate::iced_widget::text(#c).font(#font_name).#shaping
                 }
             });
 

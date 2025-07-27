@@ -3,7 +3,17 @@ use iced_core::Font;
 
 pub use iced_widget; // To avoid adding iced_widget to call site crates for the macro.
 
-pub use iced_fonts_macros::generate_icon_functions;
+use iced_fonts_macros::inner;
+
+#[macro_export]
+macro_rules! generate_icon_functions {(
+    $($input:tt)*
+) => (
+    $crate::iced_fonts_macros::inner! {
+        $crate // first token,
+        $($input)* // rest
+    }
+)}
 
 #[cfg(feature = "bootstrap")]
 /// The default icon font bytes for loading the font into iced.

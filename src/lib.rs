@@ -1,3 +1,5 @@
+#![doc = include_str!("../README.md")]
+
 #[allow(unused_imports)]
 use iced_core::Font;
 pub use iced_fonts_macros::{generate_icon_advanced_functions, generate_icon_functions};

@@ -56,7 +56,7 @@ members = ["macros"]
 iced = "0.14"
 
 [dependencies]
-iced_fonts_macros = {path = "macros", version = "0.3.0"}
+iced_fonts_macros = {path = "macros"}
 
 iced_core.workspace = true
 iced_widget.workspace = true

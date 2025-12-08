@@ -1,5 +1,7 @@
 [package]
 name = "iced_fonts_macros"
+description = "internal macro crate, not recommened to use."
+readme = "macros/README.md"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
@@ -7,7 +9,6 @@ homepage.workspace = true
 repository.workspace = true
 keywords.workspace = true
 categories.workspace = true
-readme.workspace = true
 authors.workspace = true
 
 [features]

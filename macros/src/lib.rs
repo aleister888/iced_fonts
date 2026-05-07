@@ -6,10 +6,10 @@ use proc_macro::TokenStream;
 use proc_macro2::{Ident, Span};
 use quote::quote;
 use syn::{
-    LitInt, LitStr,
     parse::{Parse, ParseStream},
     parse_macro_input,
     token::Comma,
+    LitInt, LitStr,
 };
 use ttf_parser::Face;
 
@@ -194,8 +194,8 @@ fn body(input: TokenStream, shaping: &str) -> TokenStream {
                 #[doc = #doc]
                 #[must_use]
                 pub fn #fn_name<'a, Theme: Catalog + 'a, Renderer: text::Renderer<Font = Font>>() -> Text<'a, Theme, Renderer> {
-                    use iced_widget::text;
-                    text(#c).font(#font_name).shaping(#shaping)
+                    use iced_core::widget::Text;
+                    Text::new(#c).font(#font_name).shaping(#shaping)
                 }
             });
 
@@ -235,7 +235,7 @@ fn body(input: TokenStream, shaping: &str) -> TokenStream {
           /// ```
           pub mod advanced_text {
               use iced_widget::core::Font;
-              use iced_widget::text::{self, Shaping};
+              use iced_core::text::{Shaping};
               use crate::#font_name;
 
               #advanced_functions
@@ -253,10 +253,8 @@ fn body(input: TokenStream, shaping: &str) -> TokenStream {
     TokenStream::from(quote! {
         #[doc = #doc]
         pub mod #module_name {
-            use iced_widget::core::text;
-            use iced_widget::core::Font;
-            use iced_widget::text::Text;
-            use iced_widget::text::Catalog;
+            use iced_core::{text, Font};
+            use iced_core::widget::text::{Catalog, Text};
             use crate::#font_name;
 
             /// The amount of icons in the font.

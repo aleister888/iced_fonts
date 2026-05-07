@@ -58,11 +58,9 @@ iced = "0.14"
 iced_fonts_macros = {path = "macros"}
 
 iced_core.workspace = true
-iced_widget.workspace = true
 
 [workspace.dependencies]
 iced_core = "0.14" # Iced core has the text widget, which is the only one we need.
-iced_widget = "0.14" # TODO remove 
 proc-macro2 = "1"
 quote = "1"
 syn = "2"

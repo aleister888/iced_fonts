@@ -6,10 +6,10 @@ use proc_macro::TokenStream;
 use proc_macro2::{Ident, Span};
 use quote::quote;
 use syn::{
+    LitInt, LitStr,
     parse::{Parse, ParseStream},
     parse_macro_input,
     token::Comma,
-    LitInt, LitStr,
 };
 use ttf_parser::Face;
 
@@ -166,14 +166,14 @@ fn body(input: TokenStream, shaping: &str) -> TokenStream {
 
             let doc = match doc_link {
                 Some(ref location) => format!(
-                    " Returns an [`iced_widget::Text`] widget of the [{} {}]({}/{}) icon.",
+                    " Returns an [`iced_core::Text`] widget of the [{} {}]({}/{}) icon.",
                     c,
                     processed_name,
                     location.value(),
                     raw_name,
                 ),
                 None => format!(
-                    " Returns an [`iced_widget::Text`] widget of the {} {} icon.",
+                    " Returns an [`iced_core::Text`] widget of the {} {} icon.",
                     c, processed_name
                 ),
             };

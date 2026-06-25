@@ -11,7 +11,7 @@ categories.workspace = true
 readme.workspace = true
 authors.workspace = true
 
-[package.metadata.docs.rs] 
+[package.metadata.docs.rs]
 all-features = true
 
 [workspace.package]
@@ -19,11 +19,11 @@ version = "0.3.0"
 edition = "2024"
 license = "MIT"
 homepage = "https://iced.rs"
-repository = "https://github.com/Redhawk18/iced_fonts"
+repository = "https://github.com/aleister888/iced_fonts"
 keywords = ["gui", "iced", "fonts"]
 categories = ["gui"]
 readme = "README.md"
-authors = [ "Redhawk18" ]
+authors = [ "aleister888" ]
 
 [features]
 default = []
@@ -62,8 +62,8 @@ iced_core.workspace = true
 iced_widget.workspace = true
 
 [workspace.dependencies]
-iced_core = "0.14" # Iced core has the text widget, which is the only one we need.
-iced_widget = "0.14" # TODO remove 
+iced_core = { git = "https://github.com/aleister888/iced", branch = "state-inspection" }
+iced_widget = { git = "https://github.com/aleister888/iced", branch = "state-inspection" }
 proc-macro2 = "1"
 quote = "1"
 syn = "2"
